@@ -1,0 +1,48 @@
+INSTALL
+=======
+
+Requirements
+------------
+- An NVIDIA GPU with a working CUDA driver
+- CUDA Toolkit (nvcc), version 10.0 or newer (tested against a Coursera lab
+  container with CUDA's runtime API + C++17 support)
+- A C++17-capable host compiler (installed alongside the CUDA Toolkit)
+- GNU Make
+
+No other libraries are required: image I/O is a small hand-written PPM
+reader/writer (src/ppm_io.*), and image processing uses two hand-written
+CUDA kernels (src/kernels.cu) -- there is nothing extra to install.
+
+Building
+--------
+From the project root:
+
+    make build
+
+This compiles src/main.cpp, src/ppm_io.cpp, and src/kernels.cu with nvcc
+and produces bin/cuda_batch_filter.
+
+If nvcc reports it cannot find cuda_runtime.h or -lcudart, your CUDA
+Toolkit include/lib paths differ from the defaults assumed in the
+Makefile (/usr/local/cuda/include, /usr/local/cuda/lib64). Edit the
+INCLUDES / LIBDIRS variables at the top of the Makefile to match your
+installation (`which nvcc` and `nvcc --version` are a good starting
+point for locating it).
+
+Running
+-------
+    ./run.sh [input_dir] [output_dir] [blur_radius]
+
+Defaults: input_dir=data/input, output_dir=data/output, blur_radius=2.
+This also writes a timestamped proof_of_execution_*.log file in the
+project root.
+
+Or invoke the executable directly:
+
+    ./bin/cuda_batch_filter data/input data/output 2
+
+Cleaning
+--------
+    make clean
+
+Removes the built executable and any generated data/output contents.

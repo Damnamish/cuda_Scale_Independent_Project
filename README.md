@@ -123,4 +123,3 @@ and processed the same way.
 _(This section is a starting point -- swap in your own observations
 once you've actually built and run this against your GPU, including
 timings you saw and anything that surprised you.)_
-# cuda_Scale_Independent_Project

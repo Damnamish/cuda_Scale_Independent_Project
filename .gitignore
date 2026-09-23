@@ -1,0 +1,6 @@
+bin/*
+!bin/.gitkeep
+data/output/*
+!data/output/.gitkeep
+*.log
+*.o
